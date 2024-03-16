@@ -28,7 +28,6 @@ public class RegisterDTO {
     @Size(min = 5,message = "Password must be at least 5 symbols.")
     private String confirmPassword;
 
-    @Pattern(regexp = "[0-9]\\d{1,20}",message = "Phone is invalid.")
     private String phone;
 
     @Min(value = 10,message = "Minimum age is 10.")

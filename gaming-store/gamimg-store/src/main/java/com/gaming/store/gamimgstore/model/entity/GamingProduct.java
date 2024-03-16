@@ -21,21 +21,19 @@ public class GamingProduct extends BaseEntity{
 
     @Column(nullable = false)
     private  String name;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
     @Column(nullable = false)
     private BigDecimal price;
-    @Column(nullable = false)
-    private boolean isActive;
     @Column
-    private boolean isOnSale = false;
+    private boolean isOnSale;
     @Column(nullable = false)
     private LocalDateTime createdOn;
     @Column(nullable = false)
     private LocalDateTime lastModified;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String imageUrl;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<CategoryEntity> categories;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = ImageEntity.class, mappedBy = "product")
-    private List<ImageEntity> images = new ArrayList<>();
 }
