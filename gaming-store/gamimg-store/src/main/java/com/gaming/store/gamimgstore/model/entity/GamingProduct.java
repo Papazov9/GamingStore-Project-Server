@@ -21,7 +21,7 @@ public class GamingProduct extends BaseEntity{
 
     @Column(nullable = false)
     private  String name;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
     @Column(nullable = false)
     private BigDecimal price;
@@ -31,7 +31,7 @@ public class GamingProduct extends BaseEntity{
     private LocalDateTime createdOn;
     @Column(nullable = false)
     private LocalDateTime lastModified;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String imageUrl;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<CategoryEntity> categories;

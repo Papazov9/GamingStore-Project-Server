@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gaming.store.gamimgstore.exceptions.AppException;
 import com.gaming.store.gamimgstore.model.dto.GamingProductDTO;
+import com.gaming.store.gamimgstore.model.dto.GamingProductView;
 import com.gaming.store.gamimgstore.service.GamingProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,17 +25,38 @@ public class ProductController {
     private final GamingProductService productService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<GamingProductDTO>> allProducts() {
-       List<GamingProductDTO> productDTOS = this.productService.getAllProducts();
+    public ResponseEntity<List<GamingProductView>> allProducts() {
+       List<GamingProductView> productDTOS = this.productService.getAllProducts();
 
        return ResponseEntity.ok(productDTOS);
     }
 
-    @PostMapping(value = "/addProduct")
+    @PostMapping("/addProduct")
     public ResponseEntity<GamingProductDTO> addNewProduct(@Valid @RequestBody GamingProductDTO productDTO) {
 
         GamingProductDTO gamingProductDTO = productService.addNewProduct(productDTO);
 
         return ResponseEntity.ok(gamingProductDTO);
+    }
+
+    @GetMapping("/details/{id}")
+    public ResponseEntity<GamingProductView> detailsProduct(@PathVariable String id) {
+        GamingProductView product = productService.findById(id);
+
+        return ResponseEntity.ok(product);
+    }
+
+    @PutMapping(value = "/editProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GamingProductDTO> editProduct (@Valid @RequestBody GamingProductDTO productDTO) {
+        GamingProductDTO gamingProductDTO = productService.editProduct(productDTO);
+
+        return ResponseEntity.ok(gamingProductDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<GamingProductView> deleteProduct(@PathVariable String id) {
+        GamingProductView gamingProductView = productService.deleteProduct(id);
+
+        return ResponseEntity.ok(gamingProductView);
     }
 }

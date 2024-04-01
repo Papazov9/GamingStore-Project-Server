@@ -1,5 +1,6 @@
 package com.gaming.store.gamimgstore.model.entity;
 
+import com.gaming.store.gamimgstore.model.dto.GamingProductDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,6 +51,9 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = UserRoleEntity.class)
     private Set<UserRoleEntity> userRoles;
+
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = GamingProduct.class)
+    private List<GamingProduct> gamingProducts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

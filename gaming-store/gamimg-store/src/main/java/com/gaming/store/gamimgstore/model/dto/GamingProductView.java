@@ -1,19 +1,20 @@
 package com.gaming.store.gamimgstore.model.dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class GamingProductDTO {
+public class GamingProductView {
 
-    private String id;
-
+    private  String id;
     @NotEmpty
     private String name;
 

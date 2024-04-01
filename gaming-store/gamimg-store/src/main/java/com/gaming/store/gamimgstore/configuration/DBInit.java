@@ -44,7 +44,9 @@ public class DBInit implements CommandLineRunner {
                     "Admin",
                     true,
                     LocalDateTime.now(),
-                    LocalDateTime.now(), Set.of(adminRole));
+                    LocalDateTime.now(),
+                    Set.of(adminRole),
+                    List.of());
             userRepository.saveAndFlush(adminUser);
         }
     }
