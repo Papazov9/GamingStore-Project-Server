@@ -38,7 +38,7 @@ public class AuthenticationController {
         LoginResponse userLogin = authenticationService.login(loginDTO);
 
         if (userLogin.getUsername() == null) {
-            throw new AppException("Invalid credentials or non-existing user!", HttpStatus.NOT_FOUND);
+            throw new AppException("Invalid credentials!", HttpStatus.NOT_FOUND);
         }
 
         return ResponseEntity.ok(userLogin);
