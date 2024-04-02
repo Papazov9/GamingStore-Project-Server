@@ -3,6 +3,7 @@ package com.gaming.store.gamimgstore.service;
 import com.gaming.store.gamimgstore.exceptions.AppException;
 import com.gaming.store.gamimgstore.model.dto.CartRequest;
 import com.gaming.store.gamimgstore.model.dto.GamingProductView;
+import com.gaming.store.gamimgstore.model.dto.UserViewDTO;
 import com.gaming.store.gamimgstore.model.entity.GamingProduct;
 import com.gaming.store.gamimgstore.model.entity.UserEntity;
 import com.gaming.store.gamimgstore.repo.ProductRepository;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,5 +65,23 @@ public class UserService implements UserDetailsService {
                 gamingProduct.getPrice(),
                 gamingProduct.isOnSale(),
                 gamingProduct.getImageUrl());
+    }
+
+    public UserViewDTO getUserInfoByUsername(String username) {
+        UserEntity user = userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new AppException("Invalid username!", HttpStatus.BAD_REQUEST));
+
+        return UserViewDTO
+                .builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .age(user.getAge())
+                .phone(user.getPhone())
+                .createdAt(user.getCreatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .modifiedAt(user.getLastModified().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .build();
     }
 }

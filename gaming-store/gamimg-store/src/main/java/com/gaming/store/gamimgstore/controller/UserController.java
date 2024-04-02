@@ -2,6 +2,7 @@ package com.gaming.store.gamimgstore.controller;
 
 import com.gaming.store.gamimgstore.model.dto.CartRequest;
 import com.gaming.store.gamimgstore.model.dto.GamingProductView;
+import com.gaming.store.gamimgstore.model.dto.UserViewDTO;
 import com.gaming.store.gamimgstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,10 @@ public class UserController {
     @PostMapping("/addToCart")
     public ResponseEntity<GamingProductView> addToCart (@RequestBody CartRequest cartRequest) {
         return ResponseEntity.ok(userService.addProductToCart(cartRequest));
+    }
+
+    @GetMapping("/profile/{username}")
+    public ResponseEntity<UserViewDTO> getDetailedInfo(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserInfoByUsername(username));
     }
 }
